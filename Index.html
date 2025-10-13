@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mystic Bio Page</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: #0f0f1f;
+      color: #e6eef8;
+      overflow: hidden;
+    }
+
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .lightning {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.1s ease-out;
+      z-index: 5;
+    }
+
+    .rainbow-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .cursor-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      position: absolute;
+      background: red;
+      animation: rainbow 2s linear infinite;
+    }
+
+    @keyframes rainbow {
+      0%   { background: red; }
+      16%  { background: orange; }
+      32%  { background: yellow; }
+      48%  { background: green; }
+      64%  { background: cyan; }
+      80%  { background: blue; }
+      100% { background: violet; }
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 80px auto;
+      padding: 28px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 2px solid #6c63ff;
+      border-radius: 16px;
+      box-shadow: 0 0 20px #6c63ff, 0 0 40px #6c63ff inset;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 10px #6c63ff, 0 0 20px #6c63ff inset; }
+      100% { box-shadow: 0 0 25px #ff6cf0, 0 0 50px #ff6cf0 inset; }
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* === ANIMATED AVATAR (GIF READY) === */
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid transparent;
+      animation: floatAvatar 4s ease-in-out infinite, neonBorder 3s linear infinite;
+      box-shadow:
+        0 0 20px rgba(255,0,255,0.6),
+        0 0 40px rgba(0,255,255,0.4);
+      background: linear-gradient(135deg, #ff00ff, #00ffff);
+      background-clip: padding-box;
+    }
+
+    @keyframes floatAvatar {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* === DYNAMIC NEON BORDER EFFECT === */
+    @keyframes neonBorder {
+      0% {
+        box-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff, 0 0 30px #ff00ff;
+      }
+      50% {
+        box-shadow: 0 0 20px #00ffff, 0 0 30px #ff00ff, 0 0 40px #00ffff;
+      }
+      100% {
+        box-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff, 0 0 30px #ff00ff;
+      }
+    }
+
+    h1, p, em, small {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      background: linear-gradient(90deg, #ff00ff, #00ffff, #ff9900, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow:
+        2px 2px 4px rgba(0,0,0,0.6),
+        0 0 5px #ff00ff,
+        0 0 10px #00ffff,
+        0 0 20px #ff00ff;
+      animation: neonGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes neonGlow {
+      0% { text-shadow: 0 0 10px #6c63ff; }
+      100% { text-shadow: 0 0 25px #ff6cf0, 0 0 40px #00ffff; }
+    }
+
+    h1 { font-size: 2rem; text-transform: uppercase; }
+    p.lead { margin: 0 0 12px 0; opacity: 0.9; font-size: 1rem; }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    /* === READABLE NEON BUTTONS === */
+    .btn {
+      position: relative;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #fff;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(30,30,60,0.9);
+      box-shadow:
+        0 0 8px rgba(0,255,255,0.3),
+        inset 0 0 5px rgba(255,0,255,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(90deg, #ff00ff, #00ffff);
+      border-color: rgba(255,255,255,0.5);
+      box-shadow:
+        0 0 20px #ff00ff,
+        inset 0 0 15px #00ffff;
+      transform: scale(1.08);
+    }
+
+    .ytplayer {
+      margin-top: 20px;
+      border: 2px solid #6c63ff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 30px #6c63ff, 0 0 50px #ff6cf0;
+    }
+
+    iframe { width: 100%; height: 315px; border: none; }
+
+    footer {
+      margin-top: 20px;
+      text-align: center;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div class="lightning" id="lightning"></div>
+<div class="rainbow-cursor" id="rainbow-cursor"></div>
+
+<main class="card">
+  <div class="hero">
+    <!-- ✅ Use animated GIF avatar -->
+    <img class="avatar" src="GigarazorLp.gif" alt="Avatar" />
+    <div>
+      <h1>GigarazorLp</h1>
+      <p class="lead">
+        Developer · Music by NCS – DIPIENS, HRXSTAL - INDUSTRY KISS | Funk<br/>
+        Age: 32 · Always tired · If it doesn’t make sense, then it doesn’t have to.<br/>
+        <em>– Crinchy</em>
+      </p>
+      <div class="links">
+        <a href="https://youtube.com/@gigarazorlp1911?si=hDExCC00Ti-zzghS" target="_blank" class="btn">▶️ YouTube</a>
+        <a href="https://discord.com/invite/UGqxpbrcux" target="_blank" class="btn">💬 Discord</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ytplayer">
+    <iframe 
+      src="https://www.youtube.com/embed/zhUv0JYTCm0?autoplay=1&loop=1&playlist=zhUv0JYTCm0"
+      title="YouTube Video Player"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <footer>
+    <small>✨ Mystic Bio Page · Powered by dreams and electricity.</small>
+  </footer>
+</main>
+
+<script>
+  // ⚡ Lightning effect
+  const lightning = document.getElementById('lightning');
+  function flash() {
+    const delay = Math.random() * 5000 + 1000;
+    setTimeout(() => {
+      lightning.style.opacity = 1;
+      setTimeout(() => (lightning.style.opacity = 0), 100 + Math.random() * 200);
+      flash();
+    }, delay);
+  }
+  flash();
+
+  // 🌫️ Particle Background
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const particles = [];
+  for (let i = 0; i < 120; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 2 + 1,
+      speed: Math.random() * 0.3 + 0.1
+    });
+  }
+
+  function drawParticles() {
+    ctx.fillStyle = 'rgba(15,15,31,0.3)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'white';
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+      p.y += p.speed;
+      if (p.y > canvas.height) p.y = 0;
+    });
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  // 🌈 Rainbow Mouse Trail
+  const rainbowCursor = document.getElementById('rainbow-cursor');
+  window.addEventListener('mousemove', (e) => {
+    const dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    dot.style.left = e.pageX + 'px';
+    dot.style.top = e.pageY + 'px';
+    rainbowCursor.appendChild(dot);
+    setTimeout(() => rainbowCursor.removeChild(dot), 500);
+  });
+</script>
+
+</body>
+</html>
